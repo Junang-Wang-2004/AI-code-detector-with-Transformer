@@ -1,0 +1,26 @@
+# Time:  O(8^(m * n - 1))
+# Space: O(1)
+# backtracking
+class Solution2(object):
+    def tourOfKnight(self, m, n, r, c):
+        """
+        """
+        DIRECTIONS = ((1, 2), (-1, 2), (1, -2), (-1, -2),
+                      (2, 1), (-2, 1), (2, -1), (-2, -1))
+        def backtracking(r, c, i):
+            if i == m*n:
+                return True
+            for dr, dc in DIRECTIONS:
+                nr, nc = r+dr, c+dc
+                if not (0 <= nr < m and 0 <= nc < n and result[nr][nc] == -1):
+                    continue
+                result[nr][nc] = i
+                if backtracking(nr, nc, i+1):
+                    return True
+                result[nr][nc] = -1
+            return False
+    
+        result = [[-1]*n for _ in range(m)]
+        result[r][c] = 0
+        backtracking(r, c, 1)
+        return result

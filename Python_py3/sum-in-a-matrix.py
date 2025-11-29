@@ -1,0 +1,11 @@
+# Time:  O(m * nlogn)
+# Space: O(1)
+
+# sort
+class Solution(object):
+    def matrixSum(self, nums):
+        """
+        """
+        for row in nums:
+            row.sort()
+        return sum(max(nums[r][c] for r in range(len(nums))) for c in range(len(nums[0])))

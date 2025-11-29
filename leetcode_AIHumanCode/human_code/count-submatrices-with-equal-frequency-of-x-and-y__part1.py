@@ -1,0 +1,19 @@
+# Time:  O(n * m)
+# Space: O(n * m)
+
+# dp
+class Solution(object):
+    def numberOfSubmatrices(self, grid):
+        """
+        """
+        result = 0
+        dp1 = [[0]*(len(grid[0])+1) for _ in range(len(grid)+1)]
+        dp2 = [[0]*(len(grid[0])+1) for _ in range(len(grid)+1)]
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                dp1[i+1][j+1] = dp1[i][j+1]+dp1[i+1][j]-dp1[i][j]+int(grid[i][j] == 'X')
+                dp2[i+1][j+1] = dp2[i][j+1]+dp2[i+1][j]-dp2[i][j]+int(grid[i][j] == 'Y')
+                result += int(dp1[i+1][j+1] == dp2[i+1][j+1] != 0)
+        return result
+
+

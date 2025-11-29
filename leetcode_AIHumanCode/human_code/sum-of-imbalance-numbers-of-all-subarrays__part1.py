@@ -1,0 +1,22 @@
+# Time:  O(n)
+# Space: O(n)
+
+# hash table, combinatorics
+class Solution(object):
+    def sumImbalanceNumbers(self, nums):
+        """
+        """
+        right = [len(nums)]*len(nums)
+        lookup = [len(nums)]*((len(nums)+1)+1)
+        for i in reversed(range(len(nums))):
+            right[i] = min(lookup[nums[i]], lookup[nums[i]+1])  # to avoid duplicated count
+            lookup[nums[i]] = i
+        result = left = 0
+        lookup = [-1]*((len(nums)+1)+1)
+        for i in range(len(nums)):
+            left = lookup[nums[i]+1]
+            lookup[nums[i]] = i
+            result += (i-left)*(right[i]-i)
+        return result - (len(nums)+1)*len(nums)//2  # since we overcount 1 in each subarray, we have to subtract all of them
+
+

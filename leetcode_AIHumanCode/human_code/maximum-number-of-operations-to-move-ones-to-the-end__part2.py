@@ -1,0 +1,15 @@
+# Time:  O(n)
+# Space: O(1)
+# greedy
+class Solution2(object):
+    def maxOperations(self, s):
+        """
+        """
+        result = curr = 0
+        for i in range(len(s)):
+            if s[i] != '1':
+                continue
+            curr += 1
+            if i+1 < len(s) and s[i+1] == '0':
+                result += curr
+        return result

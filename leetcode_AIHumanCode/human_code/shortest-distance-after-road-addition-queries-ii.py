@@ -1,0 +1,18 @@
+# Time:  O(nlogn)
+# Space: O(n)
+
+from sortedcontainers import SortedList
+
+
+# sorted list
+class Solution(object):
+    def shortestDistanceAfterQueries(self, n, queries):
+        """
+        """
+        sl = SortedList(range(n))
+        result = []
+        for u, v in queries:
+            for i in reversed(range(sl.bisect_right(u), sl.bisect_left(v))): 
+                sl.pop(i)
+            result.append(len(sl)-1)
+        return result

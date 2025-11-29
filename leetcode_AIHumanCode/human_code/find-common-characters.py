@@ -1,0 +1,14 @@
+# Time:  O(n * l)
+# Space: O(1)
+
+import collections
+
+
+class Solution(object):
+    def commonChars(self, A):
+        """
+        """
+        result = collections.Counter(A[0])
+        for a in A:
+            result &= collections.Counter(a)
+        return list(result.elements())

@@ -1,0 +1,16 @@
+# Time:  O(n)
+# Space: O(n)
+
+# stack
+class Solution(object):
+    def isPreorder(self, nodes):
+        """
+        """
+        stk = [nodes[0][0]]
+        for i in range(1, len(nodes)):
+            while stk and stk[-1] != nodes[i][1]:
+                stk.pop()                
+            if not stk:
+                return False            
+            stk.append(nodes[i][0])            
+        return True

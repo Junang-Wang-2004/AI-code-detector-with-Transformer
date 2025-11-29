@@ -1,0 +1,17 @@
+# Time:  O(m * n)
+# Space: O(m * n)
+
+# hash table, simulation
+class Solution(object):
+    def checkValidGrid(self, grid):
+        """
+        """
+        if grid[0][0]:
+            return False
+        lookup = [None]*(len(grid)*len(grid[0]))
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                lookup[grid[i][j]] = (i, j)
+        return all(sorted([abs(lookup[i+1][0]-lookup[i][0]), abs(lookup[i+1][1]-lookup[i][1])]) == [1, 2] for i in range(len(lookup)-1))
+
+    

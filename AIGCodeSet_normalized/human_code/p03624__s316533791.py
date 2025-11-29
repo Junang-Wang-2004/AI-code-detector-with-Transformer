@@ -1,0 +1,9 @@
+v1 = input()
+v1 = sorted(set(v1))
+v2 = 'abcdefghijklmnopqrstuvwxyz'
+for v3 in v2:
+    if v3 not in v1:
+        print(v3)
+        break
+else:
+    print('None')

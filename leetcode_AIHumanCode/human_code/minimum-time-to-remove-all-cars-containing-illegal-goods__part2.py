@@ -1,0 +1,16 @@
+# Time:  O(n)
+# Space: O(n)
+# dp
+class Solution2(object):
+    def minimumTime(self, s):
+        """
+        """
+        result, right = len(s), [0]*(len(s)+1)
+        for i in reversed(range(len(s))):
+            right[i] = min(right[i+1]+2*(s[i] == '1'), len(s)-i)
+        left = 0
+        result = left+right[0]
+        for i in range(1, len(s)+1):
+            left = min(left+2*(s[i-1] == '1'), i)     
+            result = min(result, left+right[i])
+        return result

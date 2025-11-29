@@ -1,0 +1,24 @@
+# Time:  O(h)
+# Space: O(1)
+class Solution2(object):
+    def lowestCommonAncestor(self, p, q):
+        """
+        """
+        def depth(node):
+            d = 0
+            while node:
+                node = node.parent
+                d += 1
+            return d
+        
+        p_d, q_d = depth(p), depth(q)
+        while p_d > q_d:
+            p = p.parent
+            p_d -= 1
+        while p_d < q_d:
+            q = q.parent
+            q_d -= 1
+        while p != q:
+            p = p.parent
+            q = q.parent
+        return p

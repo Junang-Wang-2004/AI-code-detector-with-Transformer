@@ -1,0 +1,33 @@
+# Time:  O(n)
+# Space: O(1)
+
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        """
+        pos = 0
+        for i in range(len(nums)):
+            if nums[i]:
+                nums[i], nums[pos] = nums[pos], nums[i]
+                pos += 1
+
+    def moveZeroes2(self, nums):
+        """
+        """
+        nums.sort(cmp=lambda a, b: 0 if b else -1)
+
+
+class Solution2(object):
+    def moveZeroes(self, nums):
+        """
+        """
+        pos = 0
+        for i in range(len(nums)):
+            if nums[i]:
+                nums[pos] = nums[i]
+                pos += 1
+
+        for i in range(pos, len(nums)):
+            nums[i] = 0
+
+

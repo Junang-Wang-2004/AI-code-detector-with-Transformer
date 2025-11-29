@@ -1,0 +1,34 @@
+# Time:  O(n)
+# Space: O(n)
+import collections
+
+
+class Solution2(object):
+    def lastSubstring(self, s):
+        """
+        """
+        count = collections.defaultdict(list)
+        for i in range(len(s)):
+            count[s[i]].append(i)
+
+        max_c = max(count.keys())
+        starts = {}
+        for i in count[max_c]:
+            starts[i] = i+1
+        while len(starts)-1 > 0:
+            lookup = set()
+            next_count = collections.defaultdict(list)
+            for start, end in starts.items():
+                if end == len(s):  # finished
+                    lookup.add(start)
+                    continue
+                next_count[s[end]].append(start)				
+                if end in starts:  # overlapped
+                    lookup.add(end)			
+            next_starts = {}
+            max_c = max(next_count.keys())
+            for start in next_count[max_c]:
+                if start not in lookup:
+                    next_starts[start] = starts[start]+1
+            starts = next_starts
+        return s[next(iter(starts.keys())):]

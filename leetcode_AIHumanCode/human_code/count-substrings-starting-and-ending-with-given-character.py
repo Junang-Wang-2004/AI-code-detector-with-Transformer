@@ -1,0 +1,10 @@
+# Time:  O(n)
+# Space: O(1)
+
+# combinatorics
+class Solution(object):
+    def countSubstrings(self, s, c):
+        """
+        """
+        n = s.count(c)
+        return (n+1)*n//2

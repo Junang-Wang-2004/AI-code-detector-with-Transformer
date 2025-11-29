@@ -1,0 +1,20 @@
+class C1(object):
+
+    def sumScores(self, a1):
+        """
+        """
+
+        def z_function(a1):
+            v1 = [0] * len(a1)
+            v2, v3 = (0, 0)
+            for v4 in range(1, len(v1)):
+                if v4 <= v3:
+                    v1[v4] = min(v3 - v4 + 1, v1[v4 - v2])
+                while v4 + v1[v4] < len(v1) and a1[v1[v4]] == a1[v4 + v1[v4]]:
+                    v1[v4] += 1
+                if v4 + v1[v4] - 1 > v3:
+                    v2, v3 = (v4, v4 + v1[v4] - 1)
+            return v1
+        v1 = z_function(a1)
+        v1[0] = len(a1)
+        return sum(v1)

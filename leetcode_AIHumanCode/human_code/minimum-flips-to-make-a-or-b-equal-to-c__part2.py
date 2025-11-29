@@ -1,0 +1,13 @@
+# Time:  O(31)
+# Space: O(1)
+class Solution2(object):
+    def minFlips(self, a, b, c):
+        """
+        """
+        result = 0
+        for i in range(31):
+            a_i, b_i, c_i = [x&1 for x in [a, b, c]]
+            if (a_i | b_i) != c_i:
+                result += 2 if a_i == b_i == 1 else 1
+            a, b, c = a >> 1, b >> 1, c >> 1
+        return result

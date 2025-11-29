@@ -1,0 +1,36 @@
+# Time:  O(m * n * k^2)
+# Space: O(k^2)
+
+from sortedcontainers import SortedList
+
+
+# two pointers, sliding window, sorted List
+class Solution(object):
+    def minAbsDiff(self, grid, k):
+        """
+        """
+        result = [[-1]*(len(grid[0])-(k-1)) for _ in range(len(grid)-(k-1))]
+        sl = SortedList(grid[0+di][0+dj] for di in range(k) for dj in range(k))
+        for i in range(len(grid)-(k-1)):
+            sl2 = SortedList(sl)
+            for j in range(len(grid[0])-(k-1)):
+                mn = float("inf")
+                prev = float("-inf")
+                for x in sl2:
+                    if prev != float("-inf") and prev != x:
+                        mn = min(mn, x-prev)
+                    prev = x
+                result[i][j] = mn if mn != float("inf") else 0
+                if j+1 == len(grid[0])-(k-1):
+                    continue
+                for di in range(k):
+                    sl2.remove(grid[i+di][j])
+                    sl2.add(grid[i+di][j+k])
+            if i+1 == len(grid)-(k-1):
+                continue
+            for dj in range(k):
+                sl.remove(grid[i][0+dj])
+                sl.add(grid[i+k][0+dj])
+        return result
+
+

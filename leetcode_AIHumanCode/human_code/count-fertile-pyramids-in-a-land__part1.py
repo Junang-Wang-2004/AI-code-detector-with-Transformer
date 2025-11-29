@@ -1,0 +1,25 @@
+# Time:  O(m * n)
+# Space: O(n)
+
+class Solution(object):
+    def countPyramids(self, grid):
+        """
+        """
+        def count(grid, reverse):
+            def get_grid(i, j):
+                return grid[~i][j] if reverse else grid[i][j]
+
+            result = 0
+            dp = [0]*len(grid[0])
+            for i in range(1, len(grid)):
+                new_dp = [0]*len(grid[0])
+                for j in range(1, len(grid[0])-1):
+                    if get_grid(i, j) == get_grid(i-1, j-1) == get_grid(i-1, j) == get_grid(i-1, j+1) == 1:
+                        new_dp[j] = min(dp[j-1], dp[j+1])+1
+                dp = new_dp
+                result += sum(dp)
+            return result
+        
+        return count(grid, False) + count(grid, True)
+
+

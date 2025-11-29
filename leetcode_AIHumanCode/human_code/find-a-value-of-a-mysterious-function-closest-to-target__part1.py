@@ -1,0 +1,54 @@
+# Time:  O(nlogm), m is the max value of arr
+# Space: O(logm)
+
+class BitCount(object):
+    def __init__(self, n):
+        self.__l = 0
+        self.__n = n
+        self.__count = [0]*n
+    
+    def __iadd__(self, num):
+        self.__l += 1
+        base = 1
+        for i in range(self.__n):
+            if num&base:
+                self.__count[i] += 1
+            base <<= 1
+        return self
+
+    def __isub__(self, num):
+        self.__l -= 1
+        base = 1
+        for i in range(self.__n):
+            if num&base:
+                self.__count[i] -= 1
+            base <<= 1
+        return self
+            
+    def bit_and(self):
+        num, base = 0, 1
+        for i in range(self.__n):
+            if self.__count[i] == self.__l:
+                num |= base
+            base <<= 1
+        return num
+
+
+class Solution(object):
+    def closestToTarget(self, arr, target):
+        """
+        """
+        count = BitCount(max(arr).bit_length())
+        result, left = float("inf"), 0
+        for right in range(len(arr)):
+            count += arr[right]
+            while left <= right:
+                f = count.bit_and()
+                result = min(result, abs(f-target))
+                if f >= target:
+                    break
+                count -= arr[left]
+                left += 1
+        return result
+                    
+  

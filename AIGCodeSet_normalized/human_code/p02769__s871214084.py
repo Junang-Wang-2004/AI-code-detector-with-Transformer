@@ -1,0 +1,18 @@
+v1, v2 = map(int, input().split())
+v3 = 10 ** 9 + 7
+v4 = 10 ** 7
+v5 = [1] * v4
+v6 = [1] * v4
+for v7 in range(v4 - 1):
+    v5[v7 + 1] = v5[v7] * (v7 + 1) % v3
+v6[v4 - 1] = pow(v5[v4 - 1], v3 - 2, v3)
+for v7 in range(1, v4)[::-1]:
+    v6[v7 - 1] = v6[v7] * v7 % v3
+
+def f1(a1, a2):
+    return v5[a1] * v6[a1 - a2] % v3 * v6[a2] % v3
+v8 = 1
+for v7 in range(1, min(v1, v2 + 1)):
+    v8 += f1(v1, v7) * f1(v1 - 1, v7) % v3
+    v8 %= v3
+print(v8)

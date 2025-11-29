@@ -1,0 +1,28 @@
+# Time:  O(n^3 * 4^n) = O(1), n = 4
+# Space: O(n^2) = O(1)
+class Solution2(object):
+    def judgePoint24(self, nums):
+        """
+        """
+        def dfs(nums):
+            if len(nums) == 1:
+                return nums[0] == 24
+            ops = [add, sub, mul, truediv]
+            for i in range(len(nums)):
+                for j in range(len(nums)):
+                    if i == j:
+                        continue
+                    next_nums = [nums[k] for k in range(len(nums))
+                                 if i != k != j]
+                    for op in ops:
+                        if ((op is add or op is mul) and j > i) or \
+                           (op == truediv and nums[j] == 0):
+                            continue
+                        next_nums.append(op(nums[i], nums[j]))
+                        if dfs(next_nums):
+                            return True
+                        next_nums.pop()
+            return False
+
+        return dfs(list(map(Fraction, nums)))
+

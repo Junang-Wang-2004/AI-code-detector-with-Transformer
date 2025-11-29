@@ -1,0 +1,24 @@
+# Time:  O(n)
+# Space: O(n)
+# prefix sum
+class Solution2(object):
+    def minimumSum(self, nums):
+        """
+        """
+        INF = float("inf")
+
+        left = [INF]*len(nums)
+        curr = INF
+        for i in range(len(nums)):
+            left[i] = curr
+            curr = min(curr, nums[i])
+        right = [INF]*len(nums)
+        curr = INF
+        for i in reversed(range(len(nums))):
+            right[i] = curr
+            curr = min(curr, nums[i])
+        result = INF
+        for i in range(len(nums)):
+            if left[i] < nums[i] > right[i]:
+                result = min(result, left[i]+nums[i]+right[i])
+        return result if result != INF else -1

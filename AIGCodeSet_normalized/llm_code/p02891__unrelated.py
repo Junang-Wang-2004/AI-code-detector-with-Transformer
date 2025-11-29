@@ -1,0 +1,7 @@
+def f1(a1, a2):
+    v1 = a1 * a2
+    v2 = 0
+    for v3 in range(len(v1) - 1):
+        if v1[v3] == v1[v3 + 1]:
+            v2 += 1
+    return v2

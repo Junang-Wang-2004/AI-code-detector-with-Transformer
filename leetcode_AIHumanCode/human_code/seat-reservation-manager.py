@@ -1,0 +1,25 @@
+# Time:  ctor:      O(n)
+#        reserve:   O(logn)
+#        unreserve: O(logn)
+# Space: O(n)
+
+import heapq
+
+
+class SeatManager(object):
+
+    def __init__(self, n):
+        """
+        """
+        self.__min_heap = list(range(1, n+1))
+        # heapq.heapify(self.__min_heap)  # no need for sorted list
+
+    def reserve(self):
+        """
+        """
+        return heapq.heappop(self.__min_heap)
+
+    def unreserve(self, seatNumber):
+        """
+        """
+        heapq.heappush(self.__min_heap, seatNumber)

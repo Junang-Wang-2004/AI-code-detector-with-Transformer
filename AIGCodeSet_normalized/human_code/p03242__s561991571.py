@@ -1,0 +1,5 @@
+v1 = input()
+v1 = v1.replace('1', 'a')
+v1 = v1.replace('9', '1')
+v1 = v1.replace('a', '9')
+print(v1)

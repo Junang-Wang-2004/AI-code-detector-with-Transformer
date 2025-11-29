@@ -1,0 +1,32 @@
+# Time:  O(n)
+# Space: O(n)
+
+# iterative dfs, tree dp
+class Solution(object):
+    def maximumScoreAfterOperations(self, edges, values):
+        """
+        """
+        def iter_dfs():
+            dp = [0]*len(values)
+            stk = [(1, 0, -1)]
+            while stk:
+                step, u, p = stk.pop() 
+                if step == 1:
+                    if len(adj[u]) == (1 if u else 0):
+                        dp[u] = values[u]
+                        continue
+                    stk.append((2, u, p))
+                    for v in reversed(adj[u]):
+                        if v != p:
+                            stk.append((1, v, u))
+                elif step == 2:
+                    dp[u] = min(sum(dp[v] for v in adj[u] if v != p), values[u])  # min(pick u, not pick u)
+            return dp[0]
+
+        adj = [[] for _ in range(len(values))]
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        return sum(values)-iter_dfs()
+
+

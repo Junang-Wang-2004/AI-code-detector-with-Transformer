@@ -1,0 +1,18 @@
+# Time:  O(m * n)
+# Space: O(m + n)
+class Solution2(object):
+    def multiply(self, num1, num2):
+        """
+        """
+        num1, num2 = num1[::-1], num2[::-1]
+        result = [0]*(len(num1)+len(num2))
+        for i in range(len(num1)):
+            for j in range(len(num2)):
+                result[i+j] += int(num1[i])*int(num2[j])
+                result[i+j+1] += result[i+j]//10
+                result[i+j] %= 10
+        for i in reversed(range(len(result))):
+            if result[i]:
+                break
+        return "".join(map(str, result[i::-1]))
+

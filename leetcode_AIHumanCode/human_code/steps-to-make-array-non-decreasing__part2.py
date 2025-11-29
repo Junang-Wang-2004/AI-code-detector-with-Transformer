@@ -1,0 +1,17 @@
+# Time:  O(n)
+# Space: O(n)
+# mono stack, dp
+class Solution2(object):
+    def totalSteps(self, nums):
+        """
+        """
+        dp = [0]*len(nums)  # dp[i]: number of rounds for nums[i] to be removed
+        stk = []
+        for i in range(len(nums)):
+            curr = 0
+            while stk and nums[stk[-1]] <= nums[i]:
+                curr = max(curr, dp[stk.pop()])
+            if stk:
+                dp[i] = curr+1
+            stk.append(i)
+        return max(dp)

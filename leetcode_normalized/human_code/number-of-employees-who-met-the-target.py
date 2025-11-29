@@ -1,0 +1,6 @@
+class C1(object):
+
+    def numberOfEmployeesWhoMetTarget(self, a1, a2):
+        """
+        """
+        return sum((x >= a2 for v1 in a1))

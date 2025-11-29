@@ -1,0 +1,14 @@
+# Time:  O(m * n)
+# Space: O(1)
+
+# array
+class Solution(object):
+    def modifiedMatrix(self, matrix):
+        """
+        """
+        for j in range(len(matrix[0])):
+            mx = max(matrix[i][j] for i in range(len(matrix)))
+            for i in range(len(matrix)):
+                if matrix[i][j] == -1:
+                    matrix[i][j] = mx
+        return matrix

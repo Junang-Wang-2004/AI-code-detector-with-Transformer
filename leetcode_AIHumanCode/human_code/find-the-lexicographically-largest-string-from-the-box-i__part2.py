@@ -1,0 +1,12 @@
+# Time:  O(n * m)
+# Space: O(m)
+# greedy
+class Solution2(object):
+    def answerString(self, word, numFriends):
+        """
+        """
+        if numFriends == 1:
+            return word
+        m = len(word)-(numFriends-1)
+        c = max(word)
+        return max(word[i:i+m] for i in range(len(word)) if word[i] == c)

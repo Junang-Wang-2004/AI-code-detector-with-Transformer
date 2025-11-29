@@ -1,0 +1,5 @@
+v1, v2, v3 = input().strip().split()
+v1 = int(v1)
+v2 = int(v2)
+v3 = int(v3)
+print(v3 - (v1 - v2))

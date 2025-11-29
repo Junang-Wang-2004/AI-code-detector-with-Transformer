@@ -1,0 +1,28 @@
+# Time:  ctor:   O(1)
+#        update: O(1)
+#        get:    O(u), u is the number of updates
+# Space: O(u)
+
+class SubrectangleQueries(object):
+
+    def __init__(self, rectangle):
+        """
+        """
+        self.__rectangle = rectangle
+        self.__updates = []
+        
+
+    def updateSubrectangle(self, row1, col1, row2, col2, newValue):
+        """
+        """
+        self.__updates.append((row1, col1, row2, col2, newValue))
+
+    def getValue(self, row, col):
+        """
+        """
+        for (row1, col1, row2, col2, newValue) in reversed(self.__updates):
+            if row1 <= row <= row2 and col1 <= col <= col2:
+                return newValue
+        return self.__rectangle[row][col]
+
+

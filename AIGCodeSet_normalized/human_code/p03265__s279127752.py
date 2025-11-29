@@ -1,0 +1,6 @@
+v1, v2, v3, v4 = map(int, input().split())
+v5 = v4 + (v3 - v1)
+v6 = v3 - (v4 - v2)
+v7 = v5 - (v4 - v2)
+v8 = v6 - (v3 - v1)
+print(v6, v5, v8, v7)

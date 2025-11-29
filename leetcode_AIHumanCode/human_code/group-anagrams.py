@@ -1,0 +1,20 @@
+# Time:  O(n * glogg), g is the max size of groups.
+# Space: O(n)
+
+import collections
+
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        """
+        anagrams_map, result = collections.defaultdict(list), []
+        for s in strs:
+            sorted_str = ("").join(sorted(s))
+            anagrams_map[sorted_str].append(s)
+        for anagram in list(anagrams_map.values()):
+            anagram.sort()
+            result.append(anagram)
+        return result
+
+

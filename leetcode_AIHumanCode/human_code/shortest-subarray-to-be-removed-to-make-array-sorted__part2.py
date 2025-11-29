@@ -1,0 +1,24 @@
+# Time:  O(n)
+# Space: O(1)
+class Solution2(object):
+    def findLengthOfShortestSubarray(self, arr):
+        """
+        """
+        result = 0
+        for i in range(1, len(arr)):
+            if arr[i-1] <= arr[i]:
+                continue
+            j = len(arr)-1
+            while j > i and (j == len(arr)-1 or arr[j] <= arr[j+1]) and arr[i-1] <= arr[j]:
+                j -= 1
+            result = j-i+1
+            break
+        for j in reversed(range(len(arr)-1)):
+            if arr[j] <= arr[j+1]:
+                continue
+            i = 0
+            while i < j and (i == 0 or arr[i-1] <= arr[i]) and arr[i] <= arr[j+1]:
+                i += 1
+            result = min(result, j-i+1)
+            break
+        return result

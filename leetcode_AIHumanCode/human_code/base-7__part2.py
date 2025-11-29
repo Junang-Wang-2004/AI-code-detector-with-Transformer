@@ -1,0 +1,13 @@
+# Time:  O(1)
+# Space: O(1)
+
+class Solution2(object):
+    def convertToBase7(self, num):
+        """
+        """
+        if num < 0:
+            return '-' + self.convertToBase7(-num)
+        if num < 7:
+            return str(num)
+        return self.convertToBase7(num // 7) + str(num % 7)
+

@@ -1,0 +1,17 @@
+# Time:  O(nlogn)
+# Space: O(1)
+# sort, greedy
+class Solution2(object):
+    def maxCaloriesBurnt(self, heights):
+        """
+        """
+        heights.sort()
+        d = 0
+        left, right = 0, len(heights)-1
+        result = (0-heights[right])**2
+        while left != right:
+            result += (heights[right]-heights[left])**2
+            left += d
+            d ^= 1
+            right -= d
+        return result

@@ -1,0 +1,39 @@
+from functools import reduce
+# Time:  O(n^2 * k), k = max(cnt for _, cnt in requirements)
+# Space: O(n + k)
+# knapsack dp, combinatorics
+class Solution4(object):
+    def numberOfPermutations(self, n, requirements):
+        """
+        """
+        MOD = 10**9+7
+        lookup = [-1]*n
+        for i, c in requirements:
+            lookup[i] = c
+        dp = [0]*(lookup[-1]+1)
+        dp[0] = 1
+        for i in range(n):
+            dp = [reduce(lambda total, k: (total+dp[j-k])%MOD, range(min(i+1, j+1)), 0) if lookup[i] == -1 or lookup[i] == j else 0 for j in range(len(dp))]
+        return dp[-1]%MOD
+
+
+class Solution_ConstructPermutation(object):
+    def numberOfPermutations(self, n, requirements):
+        """
+        """
+        MOD = 10**9+7
+        lookup = [-1]*n
+        for i, c in requirements:
+            lookup[i] = c
+        dp = [[] for _ in range(lookup[-1]+1)]
+        dp[0].append([])
+        for i in range(n):
+            dp = [[[x+int(x >= i-k) for x in p]+[i-k] for k in range(min(i+1, j+1)) for p in dp[j-k]] if lookup[i] == -1 or lookup[i] == j else [] for j in range(len(dp))]
+        for p in dp[-1]:
+            curr = 0
+            for i in range(n):
+                for j in range(i):
+                    curr += int(p[j] > p[i])
+                if lookup[i] != -1:
+                    assert(lookup[i] == curr)
+        return len(dp[-1])%MOD

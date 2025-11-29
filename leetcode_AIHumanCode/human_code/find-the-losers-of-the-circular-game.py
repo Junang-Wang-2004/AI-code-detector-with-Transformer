@@ -1,0 +1,16 @@
+# Time:  O(n)
+# Space: O(n)
+
+# hash table, simulation
+class Solution(object):
+    def circularGameLosers(self, n, k):
+        """
+        """
+        lookup = [False]*n
+        idx = 0
+        for i in range(n):
+            if lookup[idx]:
+                break
+            lookup[idx] = True
+            idx = (idx+(i+1)*k)%n
+        return [i+1 for i in range(n) if not lookup[i]]

@@ -1,0 +1,5 @@
+v1 = int(input())
+v2 = list(map(int, input().split()))
+v3 = max(v2)
+v4 = min(filter(lambda x: x != v3, v2), key=lambda x: abs(x - v3 // 2))
+print('{} {}'.format(v3, v4))

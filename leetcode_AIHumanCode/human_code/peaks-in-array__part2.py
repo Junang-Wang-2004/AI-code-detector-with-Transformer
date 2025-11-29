@@ -1,0 +1,46 @@
+# Time:  O(nlogn + qlogn)
+# Space: O(n)
+# bit, fenwick tree
+class Solution2(object):
+    def countOfPeaks(self, nums, queries):
+        """
+        """
+        class BIT(object):  # 0-indexed.
+            def __init__(self, n):
+                self.__bit = [0]*(n+1)  # Extra one for dummy node.
+
+            def add(self, i, val):
+                i += 1  # Extra one for dummy node.
+                while i < len(self.__bit):
+                    self.__bit[i] += val
+                    i += (i & -i)
+
+            def query(self, i):
+                i += 1  # Extra one for dummy node.
+                ret = 0
+                while i > 0:
+                    ret += self.__bit[i]
+                    i -= (i & -i)
+                return ret
+
+        def check(i):
+            return nums[i-1] < nums[i] > nums[i+1]
+
+        def update(x, d):
+            for i in range(max(x-1, 1), min((x+1)+1, len(nums)-1)):
+                if check(i):
+                    bit.add(i, d)
+
+        bit = BIT(len(nums))
+        for i in range(1, len(nums)-1):
+            if check(i):
+                bit.add(i, +1)
+        result = []
+        for t, x, y in queries:
+            if t == 1:
+                result.append(bit.query(y-1)-bit.query((x+1)-1) if y-1 >= x+1 else 0)
+                continue
+            update(x, -1)
+            nums[x] = y
+            update(x, +1)
+        return result

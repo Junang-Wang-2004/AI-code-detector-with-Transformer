@@ -1,0 +1,29 @@
+# Time:  O(r + 2^n * n^3)
+# Space: O(n^2)
+# bitmasks, Floyd-Warshall algorithm
+class Solution2(object):
+    def numberOfSets(self, n, maxDistance, roads):
+        """
+        """
+        def check(mask, dist):
+            return all(dist[i][j] <= maxDistance for i in range(n) if mask&(1<<i) for j in range(i+1, n) if mask&(1<<j))
+
+        def floydWarshall(mask, dist):
+            for k in range(len(dist[0])):
+                if mask&(1<<k) == 0:
+                    continue
+                for i in range(len(dist)):
+                    if mask&(1<<i) == 0:  # optional, to speed up performance
+                        continue
+                    for j in range(i+1, len(dist[i])):
+                        if mask&(1<<j) == 0:  # optional, to speed up performance
+                             continue
+                        dist[j][i] = dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j])
+            return check(mask, dist)
+
+        dist = [[0 if u == v else float("inf") for v in range(n)] for u in range(n)]
+        for u, v, w in roads:
+            dist[u][v] = min(dist[u][v], w)
+            dist[v][u] = min(dist[v][u], w)
+        return sum(floydWarshall(mask, [d[:] for d in dist]) for mask in range(1<<n))
+    

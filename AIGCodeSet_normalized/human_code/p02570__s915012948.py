@@ -1,0 +1,7 @@
+v1, v2, v3 = map(int, input().split())
+if v1 // v3 == v2 and v1 % v3 == 0:
+    print('Yes')
+elif v1 // v3 < v2:
+    print('Yes')
+else:
+    print('No')

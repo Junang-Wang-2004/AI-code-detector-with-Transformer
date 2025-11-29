@@ -1,0 +1,16 @@
+# Time:  O(n + vlogv), v is the number of the level videos
+# Space: O(w)
+
+import collections
+
+
+class Solution(object):
+    def watchedVideosByFriends(self, watchedVideos, friends, id, level):
+        """
+        """
+        curr_level, lookup = set([id]), set([id])
+        for _ in range(level):
+            curr_level = set(j for i in curr_level for j in friends[i] if j not in lookup)
+            lookup |= curr_level
+        count = collections.Counter([v for i in curr_level for v in watchedVideos[i]])
+        return sorted(list(count.keys()), key=lambda x: (count[x], x))

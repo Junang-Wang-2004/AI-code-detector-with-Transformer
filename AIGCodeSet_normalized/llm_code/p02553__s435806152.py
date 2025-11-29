@@ -1,0 +1,7 @@
+v1 = input().split()
+v2 = int(v1[0]) * int(v1[2])
+v3 = int(v1[0]) * int(v1[3])
+v4 = int(v1[1]) * int(v1[2])
+v5 = int(v1[1]) * int(v1[3])
+list = (v2, v3, v4, v5)
+print(max(list))

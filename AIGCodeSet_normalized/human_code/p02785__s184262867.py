@@ -1,0 +1,6 @@
+v1, v2 = map(int, input().split())
+v3 = list(map(int, input().split()))
+v4 = sum(v3)
+v3.sort(reverse=True)
+min = sum(v3[:v2])
+print(v4 - min)

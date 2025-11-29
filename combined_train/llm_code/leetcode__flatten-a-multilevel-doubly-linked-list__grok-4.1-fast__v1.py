@@ -1,0 +1,26 @@
+class C1(object):
+
+    def __init__(self, a1, a2, a3, a4):
+        self.val = a1
+        self.prev = a2
+        self.next = a3
+        self.child = a4
+
+class C2(object):
+
+    def flatten(self, a1):
+        v1 = a1
+        while v1:
+            if v1.child:
+                v2 = v1.child
+                v3 = v2
+                while v3.next:
+                    v3 = v3.next
+                v3.next = v1.next
+                if v1.next:
+                    v1.next.prev = v3
+                v1.next = v2
+                v2.prev = v1
+                v1.child = None
+            v1 = v1.next
+        return a1

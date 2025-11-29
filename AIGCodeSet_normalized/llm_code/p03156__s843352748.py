@@ -1,0 +1,7 @@
+v1 = int(input())
+v2, v3 = map(int, input().split())
+v4 = list(map(int, input().split()))
+v5 = len([x for v6 in v4 if v6 <= v2])
+v7 = len([v6 for v6 in v4 if v2 < v6 <= v3])
+v8 = len([v6 for v6 in v4 if v3 < v6])
+print(min(v5 // 3, v7 // 3, v8 // 3))

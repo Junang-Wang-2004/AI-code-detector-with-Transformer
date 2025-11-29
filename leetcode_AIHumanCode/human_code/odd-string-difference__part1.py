@@ -1,0 +1,20 @@
+# Time:  O(m * n), m is the number of words, n is the length of each word
+# Space: O(1)
+
+import collections
+
+
+# freq table
+class Solution(object):
+    def oddString(self, words):
+        """
+        """
+        for i in range(len(words[0])-1):
+            lookup = collections.defaultdict(list)
+            for j, w in enumerate(words):
+                if len(lookup[ord(w[i+1])-ord(w[i])]) < 2:
+                    lookup[ord(w[i+1])-ord(w[i])].append(j)
+            if len(lookup) == 2:
+                return next(words[l[0]] for l in lookup.values() if len(l) == 1)
+
+

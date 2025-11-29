@@ -1,0 +1,36 @@
+# Time:  O((d + n) * 2^n)
+# Space: O(d + n)
+class Solution2(object):
+    def minAbbreviation(self, target, dictionary):
+        """
+        """
+        def bits_to_abbr(targets, bits):
+            abbr = []
+            pre = 0
+            for i in range(len(target)):
+                if bits & 1:
+                    if i - pre > 0:
+                        abbr.append(str(i - pre))
+                    pre = i + 1
+                    abbr.append(target[i])
+                elif i == len(target) - 1:
+                    abbr.append(str(i - pre + 1))
+                bits >>= 1
+            return "".join(abbr)
+  
+        diffs = []
+        for word in dictionary:
+            if len(word) != len(target):
+                continue
+            diffs.append(sum(2**i for i, c in enumerate(word) if target[i] != c))
+
+        if not diffs:
+            return str(len(target))
+
+        result = target
+        for mask in range(2**len(target)):
+            abbr = bits_to_abbr(target, mask)
+            if all(d & mask for d in diffs) and len(abbr) < len(result):
+                result = abbr
+        return result
+

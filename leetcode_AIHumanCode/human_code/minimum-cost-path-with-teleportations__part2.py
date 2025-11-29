@@ -1,0 +1,25 @@
+# Time:  O(k * (m * n + r))
+# Space: O(m * n + r)
+# dp, prefix sum
+class Solution2(object):
+    def minCost(self, grid, k):
+        """
+        """
+        dp = [[float("inf")]*len(grid[0]) for _ in range(len(grid))]
+        dp[-1][-1] = 0
+        mx = max(max(row) for row in grid)
+        prefix = [float("inf")]*(mx+1)
+        for i in range(k+1):
+            for r in reversed(range(len(grid))):
+                for c in reversed(range(len(grid[0]))):
+                    if r+1 < len(grid):
+                        dp[r][c] = min(dp[r][c], dp[r+1][c]+grid[r+1][c])
+                    if c+1 < len(grid[0]):
+                        dp[r][c] = min(dp[r][c], dp[r][c+1]+grid[r][c+1])
+                    dp[r][c] = min(dp[r][c], prefix[grid[r][c]])
+            for r in range(len(grid)):
+                for c in range(len(grid[0])):
+                    prefix[grid[r][c]] = min(prefix[grid[r][c]], dp[r][c])
+            for i in range(len(prefix)-1):
+                prefix[i+1] = min(prefix[i+1], prefix[i])
+        return dp[0][0]
