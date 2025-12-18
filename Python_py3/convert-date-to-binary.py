@@ -1,9 +1,0 @@
-# Time:  O(1)
-# Space: O(1)
-
-# string
-class Solution(object):
-    def convertDateToBinary(self, date):
-        """
-        """
-        return "-".join([bin(int(x))[2:] for x in date.split('-')])
